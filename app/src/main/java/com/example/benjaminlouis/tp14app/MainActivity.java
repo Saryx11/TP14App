@@ -1,5 +1,6 @@
 package com.example.benjaminlouis.tp14app;
 
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,7 @@ import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Handler handlerTest;
+    //private Handler handlerTest;
     ProgressBar barre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,17 +21,20 @@ public class MainActivity extends AppCompatActivity {
         Button go = (Button) findViewById(R.id.go);
         barre = (ProgressBar) findViewById(R.id.progress);
 
-        handlerTest = new Handler(){
+
+        /*handlerTest = new Handler(){
         public void handleMessage(Message msg){
             int progress=msg.getData().getInt("PROGRESS");
             MainActivity.this.barre.incrementProgressBy(progress);
-        }  };
+        }  };*/
 
 
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Thread prog = new Thread(new Runnable() {
+                AsyncTaskClass asc=new AsyncTaskClass(MainActivity.this);
+                asc.execute();
+                /*Thread prog = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         Bundle messageBundle = new Bundle();
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-                prog.start();
+                prog.start();*/
             }
         });
     }
